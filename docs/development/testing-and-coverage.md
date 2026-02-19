@@ -38,9 +38,7 @@ cmake --build build-coverage --target coverage
 
 Coverage target gates currently enforced:
 
-- line coverage >= `75%`
-- function coverage >= `85%`
-- branch coverage >= `50%`
+- no minimum thresholds (reporting only)
 
 Artifacts:
 

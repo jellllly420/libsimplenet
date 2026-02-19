@@ -9,5 +9,5 @@
     "containerEnv": {
         "SHELL": "/bin/zsh"
     },
-    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y --no-install-recommends liburing-dev libboost-dev libboost-system-dev gcovr clangd clang-format clang-tidy hyperfine valgrind linux-perf doxygen graphviz python3-matplotlib && sudo apt-get clean && sudo rm -rf /var/lib/apt/lists/*"
+    "postCreateCommand": "bash ./scripts/setup_devcontainer_deps.sh"
 }

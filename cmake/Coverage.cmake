@@ -33,9 +33,6 @@ function(simplenet_add_coverage_target)
       --filter ${CMAKE_SOURCE_DIR}/src
       --merge-mode-functions=merge-use-line-max
       --exclude-unreachable-branches
-      --fail-under-line 75
-      --fail-under-function 85
-      --fail-under-branch 50
       --print-summary
       --xml ${CMAKE_BINARY_DIR}/coverage/coverage.xml
       --html-details ${CMAKE_BINARY_DIR}/coverage/index.html

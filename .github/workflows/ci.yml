@@ -14,6 +14,8 @@ permissions:
 jobs:
   build-and-test:
     runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/devcontainers/cpp:latest
     strategy:
       fail-fast: false
       matrix:
@@ -24,11 +26,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            cmake ninja-build liburing-dev libboost-dev libboost-system-dev clang g++
+      - name: Install devcontainer dependencies
+        run: bash ./scripts/setup_devcontainer_deps.sh
 
       - name: Configure
         env:
@@ -44,15 +43,14 @@ jobs:
 
   docs:
     runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/devcontainers/cpp:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            cmake ninja-build liburing-dev doxygen graphviz
+      - name: Install devcontainer dependencies
+        run: bash ./scripts/setup_devcontainer_deps.sh
 
       - name: Configure
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug
@@ -69,15 +67,14 @@ jobs:
 
   coverage:
     runs-on: ubuntu-24.04
+    container:
+      image: mcr.microsoft.com/devcontainers/cpp:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            cmake ninja-build liburing-dev gcovr g++
+      - name: Install devcontainer dependencies
+        run: bash ./scripts/setup_devcontainer_deps.sh
 
       - name: Configure
         env:
