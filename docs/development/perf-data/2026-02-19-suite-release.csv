@@ -1,0 +1,15 @@
+PERF,suite=libsimplenet_vs_boost_asio,format=v1
+PERF,impl=libsimplenet,scenario=idle_wait,iterations=200000,total_ms=22.5805,avg_ns_per_wait=112.902,waits_per_sec=8.85722e+06
+PERF,impl=boost_asio,scenario=idle_wait,iterations=200000,total_ms=23.7006,avg_ns_per_wait=118.503,waits_per_sec=8.43861e+06
+PERF,impl=libsimplenet,scenario=tcp_echo,iterations=2000,payload_size=64,connections=8,echoes=16000,bytes=2048000,total_ms=150.849,echoes_per_sec=106066.507,mb_per_sec=13.577
+PERF,impl=boost_asio,scenario=tcp_echo,iterations=2000,payload_size=64,connections=8,echoes=16000,bytes=2048000,total_ms=137.608,echoes_per_sec=116272.627,mb_per_sec=14.883
+PERF,impl=libsimplenet,scenario=tcp_echo,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,total_ms=150.058,echoes_per_sec=106625.113,mb_per_sec=218.368
+PERF,impl=boost_asio,scenario=tcp_echo,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,total_ms=144.372,echoes_per_sec=110824.877,mb_per_sec=226.969
+PERF,impl=libsimplenet,scenario=tcp_echo,iterations=2000,payload_size=16384,connections=8,echoes=16000,bytes=524288000,total_ms=153.586,echoes_per_sec=104176.077,mb_per_sec=3413.642
+PERF,impl=boost_asio,scenario=tcp_echo,iterations=2000,payload_size=16384,connections=8,echoes=16000,bytes=524288000,total_ms=167.458,echoes_per_sec=95546.084,mb_per_sec=3130.854
+PERF,impl=libsimplenet,scenario=connection_churn,iterations=1500,connections=16,total_connections=24000,bytes=48000,total_ms=326.814,connections_per_sec=73436.220
+PERF,impl=boost_asio,scenario=connection_churn,iterations=1500,connections=16,total_connections=24000,bytes=48000,total_ms=363.039,connections_per_sec=66108.600
+PERF,impl=libsimplenet,scenario=connection_churn,iterations=1500,connections=32,total_connections=48000,bytes=96000,total_ms=604.053,connections_per_sec=79463.193
+PERF,impl=boost_asio,scenario=connection_churn,iterations=1500,connections=32,total_connections=48000,bytes=96000,total_ms=666.555,connections_per_sec=72012.053
+PERF,impl=libsimplenet,scenario=connection_churn,iterations=1500,connections=64,total_connections=96000,bytes=192000,total_ms=1099.760,connections_per_sec=87291.756
+PERF,impl=boost_asio,scenario=connection_churn,iterations=1500,connections=64,total_connections=96000,bytes=192000,total_ms=1250.264,connections_per_sec=76783.765

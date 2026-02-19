@@ -1,0 +1,66 @@
+name: perf
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  perf-smoke:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            cmake ninja-build liburing-dev libboost-dev libboost-system-dev g++
+
+      - name: Run performance suite (reduced CI profile)
+        env:
+          BUILD_DIR: ${{ github.workspace }}/build-perf-ci
+          PERF_REPEATS: "2"
+          IDLE_ITERATIONS: "40000"
+          ECHO_ITERATIONS: "400"
+          ECHO_PAYLOAD_SIZES: "64,1024,16384"
+          ASYNC_ECHO_ITERATIONS: "400"
+          ASYNC_ECHO_PAYLOAD_SIZES: "64,1024,16384"
+          ASYNC_ECHO_CONNECTIONS: "8"
+          CHURN_ITERATIONS: "300"
+          CHURN_CONNECTION_LEVELS: "16,32"
+        run: |
+          bash ./scripts/run_perf_suite.sh | tee perf-suite.csv
+
+      - name: Validate perf output schema
+        run: |
+          awk '
+            /^PERF_MEDIAN,impl=libsimplenet,scenario=idle_wait/ { s1=1 }
+            /^PERF_MEDIAN,impl=boost_asio,scenario=idle_wait/ { s2=1 }
+            /^PERF_MEDIAN,impl=libsimplenet,scenario=tcp_echo/ { s3=1 }
+            /^PERF_MEDIAN,impl=boost_asio,scenario=tcp_echo/ { s4=1 }
+            /^PERF_MEDIAN,impl=libsimplenet,scenario=async_tcp_echo,backend=epoll/ { s5=1 }
+            /^PERF_MEDIAN,impl=boost_asio,scenario=async_tcp_echo,backend=epoll/ { s6=1 }
+            /^PERF_MEDIAN,impl=libsimplenet,scenario=connection_churn/ { s7=1 }
+            /^PERF_MEDIAN,impl=boost_asio,scenario=connection_churn/ { s8=1 }
+            END {
+              ok = s1 && s2 && s3 && s4 && s5 && s6 && s7 && s8
+              if (!ok) {
+                print "missing expected PERF_MEDIAN rows" > "/dev/stderr"
+                exit 1
+              }
+            }
+          ' perf-suite.csv
+
+      - name: Upload perf artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-suite-csv
+          path: perf-suite.csv
+          if-no-files-found: error

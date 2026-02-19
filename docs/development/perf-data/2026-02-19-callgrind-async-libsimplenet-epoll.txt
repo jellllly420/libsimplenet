@@ -1,0 +1,477 @@
+--------------------------------------------------------------------------------
+Profile data file 'docs/development/perf-data/2026-02-19-callgrind-async-libsimplenet-epoll.out' (creator: callgrind-3.24.0)
+--------------------------------------------------------------------------------
+I1 cache: 
+D1 cache: 
+LL cache: 
+Timerange: Basic block 0 - 7001689
+Trigger: Program termination
+Profiled target:  ./build-perf/example/simplenet_perf_async_echo_libsimplenet --backend epoll --iterations 800 --payload-size 1024 --connections 8 (PID 79541, part 1)
+Events recorded:  Ir
+Events shown:     Ir
+Event sort order: Ir
+Thresholds:       99
+Include dirs:     
+User annotated:   
+Auto-annotation:  on
+
+--------------------------------------------------------------------------------
+Ir                  
+--------------------------------------------------------------------------------
+30,336,129 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+Ir                  file:function
+--------------------------------------------------------------------------------
+
+3,733,114 (12.31%)  *  ???:simplenet::runtime::event_loop::cleanup_completed_roots()'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+551,711,221 (1818.7%)  >   ???:simplenet::runtime::event_loop::cleanup_completed_roots()'2 (141x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+193,010,219 (636.2%)  >   ???:simplenet::runtime::wait_readable(simplenet::runtime::wait_readable(int)::_ZN9simplenet7runtime13wait_readableEi.Frame*) [clone .actor]'2 (9x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+55,173,022 (181.9%)  >   ???:simplenet::runtime::event_loop::run()'2 (4x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+27,596,179 (90.97%)  >   ???:simplenet::runtime::wait_readable(simplenet::runtime::wait_readable(int)::_ZN9simplenet7runtime13wait_readableEi.Frame*) [clone .actor] (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   56,454 ( 0.19%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 (10x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    4,940 ( 0.02%)  >   ???:(anonymous namespace)::run_accept_loop((anonymous namespace)::run_accept_loop(simplenet::io_context&, simplenet::nonblocking::tcp_listener&, unsigned long, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, std::atomic<unsigned long>&)::_ZN12_GLOBAL__N_115run_accept_loopERN9simplenet10io_contextERNS0_11nonblocking12tcp_listenerEmmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERS6_ImE.Frame*) [clone .actor] (5x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    4,769 ( 0.02%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor] (7x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    3,733 ( 0.01%)  >   ???:simplenet::runtime::async_accept(simplenet::runtime::async_accept(simplenet::nonblocking::tcp_listener&)::_ZN9simplenet7runtime12async_acceptERNS_11nonblocking12tcp_listenerE.Frame*) [clone .actor] (8x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    2,890 ( 0.01%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor] (6x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    2,863 ( 0.01%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .destroy] (8x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    1,740 ( 0.01%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor] (5x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    1,113 ( 0.00%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (6x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    1,008 ( 0.00%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (3x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      974 ( 0.00%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (3x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      770 ( 0.00%)  >   ???:simplenet::runtime::event_loop::process_expired_waiters() (70x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      456 ( 0.00%)  >   ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (3x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      187 ( 0.00%)  >   ???:(anonymous namespace)::run_accept_loop((anonymous namespace)::run_accept_loop(simplenet::io_context&, simplenet::nonblocking::tcp_listener&, unsigned long, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, std::atomic<unsigned long>&)::_ZN12_GLOBAL__N_115run_accept_loopERN9simplenet10io_contextERNS0_11nonblocking12tcp_listenerEmmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERS6_ImE.Frame*) [clone .destroy] (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+2,526,302 ( 8.33%)  *  ./malloc/./malloc/malloc.c:malloc [/usr/lib/aarch64-linux-gnu/libc.so.6]
+   15,895 ( 0.05%)  >   ./malloc/./malloc/malloc.c:_int_malloc (94x)
+    1,058 ( 0.00%)  >   ./malloc/./malloc/malloc.c:tcache_init.part.0 (1x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+      425 ( 0.00%)  >   ???:__aarch64_cas4_acq (85x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+
+2,039,431 ( 6.72%)  *  ???:free'2
+15,135,084,936 (49891.3%)  >   ???:simplenet::runtime::event_loop::run()'2 (1,099x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  972,857 ( 3.21%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 (6,407x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  870,400 ( 2.87%)  >   ???:simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>) (6,400x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  767,640 ( 2.53%)  >   ???:simplenet::nonblocking::tcp_stream::read_some(std::span<std::byte, 18446744073709551615ul>) (6,397x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  204,800 ( 0.68%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (6,400x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  204,800 ( 0.68%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (6,400x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    2,839 ( 0.01%)  >   ???:std::vector<(anonymous namespace)::posix_socket, std::allocator<(anonymous namespace)::posix_socket> >::~vector() (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    2,721 ( 0.01%)  >   ???:std::promise<std::expected<void, simplenet::error> >::~promise() (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    1,603 ( 0.01%)  >   ???:operator delete(void*, unsigned long)'2 (4x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+    1,538 ( 0.01%)  >   ???:simplenet::unique_fd::~unique_fd() (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      294 ( 0.00%)  >   ./string/../sysdeps/aarch64/multiarch/../memset.S:__memset_zva64 (2x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+       35 ( 0.00%)  >   ???:simplenet::runtime::event_loop::on_task_completed() (7x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+        6 ( 0.00%)  >   ???:std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose() (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+1,870,514 ( 6.17%)  *  ./malloc/./malloc/malloc.c:free'2 [/usr/lib/aarch64-linux-gnu/libc.so.6]
+  544,683 ( 1.80%)  >   ./malloc/./malloc/malloc.c:free'2 (45,921x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+   12,431 ( 0.04%)  >   ./malloc/./malloc/malloc.c:_int_free_chunk (88x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+
+1,802,947 ( 5.94%)  *  ???:operator new(unsigned long) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+2,539,498 ( 8.37%)  >   ./malloc/./malloc/malloc.c:malloc (45,918x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+1,338,955 ( 4.41%)  >   ???:simplenet::make_error_from_errno(int)'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,040,269 ( 3.43%)  >   ???:operator new(unsigned long)'2 (2x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+   64,020 ( 0.21%)  >   ???:std::__detail::_Prime_rehash_policy::_M_need_rehash(unsigned long, unsigned long, unsigned long) const (6,402x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+   57,618 ( 0.19%)  >   ???:std::__detail::_Map_base<unsigned long, std::pair<unsigned long const, std::expected<void, simplenet::error> >, std::allocator<std::pair<unsigned long const, std::expected<void, simplenet::error> > >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](unsigned long&&)'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   31,990 ( 0.11%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (6,398x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    2,464 ( 0.01%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 (8x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    1,153 ( 0.00%)  >   ???:(anonymous namespace)::run_accept_loop((anonymous namespace)::run_accept_loop(simplenet::io_context&, simplenet::nonblocking::tcp_listener&, unsigned long, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, std::atomic<unsigned long>&)::_ZN12_GLOBAL__N_115run_accept_loopERN9simplenet10io_contextERNS0_11nonblocking12tcp_listenerEmmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERS6_ImE.Frame*) [clone .actor]'2 (8x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      896 ( 0.00%)  >   ???:simplenet::epoll::reactor::wait(std::span<simplenet::epoll::ready_event, 18446744073709551615ul>, std::chrono::duration<long, std::ratio<1l, 1000l> >)'2 (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      660 ( 0.00%)  >   ./string/../sysdeps/aarch64/multiarch/../memset.S:__memset_zva64 (8x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+      112 ( 0.00%)  >   ???:simplenet::runtime::event_loop::schedule(std::__n4861::coroutine_handle<void>) (8x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+       46 ( 0.00%)  >   ???:void simplenet::runtime::engine::spawn<void>(simplenet::runtime::task<void>&&) (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+       40 ( 0.00%)  >   ???:simplenet::unique_fd::unique_fd(simplenet::unique_fd&&) (8x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+1,569,951 ( 5.18%)  *  ???:simplenet::runtime::event_loop::process_ready_event(simplenet::epoll::ready_event const&)'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+63,497,830,167 (209314.2%)  >   ???:simplenet::runtime::event_loop::process_ready_event(simplenet::epoll::ready_event const&)'2 (4,593x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+10,949,892,778 (36095.2%)  >   ???:simplenet::runtime::wait_readable(simplenet::runtime::wait_readable(int)::_ZN9simplenet7runtime13wait_readableEi.Frame*) [clone .actor]'2 (6,624x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+3,143,434,522 (10362.0%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (7,547x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+2,779,023,863 (9160.8%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (7,554x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+2,323,805,720 (7660.2%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 (7,456x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+2,216,164,790 (7305.4%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (7,450x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,698,423,350 (5598.7%)  >   ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (3,747x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,433,588,087 (4725.7%)  >   ???:operator delete(void*, unsigned long)'2 (107x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+57,212,432 (188.6%)  >   ???:simplenet::runtime::event_loop::cleanup_completed_roots()'2 (38,881x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+27,560,566 (90.85%)  >   ???:(anonymous namespace)::run_accept_loop((anonymous namespace)::run_accept_loop(simplenet::io_context&, simplenet::nonblocking::tcp_listener&, unsigned long, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, std::atomic<unsigned long>&)::_ZN12_GLOBAL__N_115run_accept_loopERN9simplenet10io_contextERNS0_11nonblocking12tcp_listenerEmmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERS6_ImE.Frame*) [clone .actor] (3x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+27,555,485 (90.83%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor] (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+27,461,496 (90.52%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor] (33x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+27,365,563 (90.21%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor] (57x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+27,351,320 (90.16%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor] (64x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+27,310,410 (90.03%)  >   ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor] (40x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,773,814 ( 5.85%)  >   ???:std::__detail::_Map_base<unsigned long, std::pair<unsigned long const, std::expected<void, simplenet::error> >, std::allocator<std::pair<unsigned long const, std::expected<void, simplenet::error> > >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](unsigned long&&) (6,401x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  710,694 ( 2.34%)  >   ???:std::_Hashtable<int, std::pair<int const, simplenet::runtime::event_loop::waiter_slot>, std::allocator<std::pair<int const, simplenet::runtime::event_loop::waiter_slot> >, std::__detail::_Select1st, std::equal_to<int>, std::hash<int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::erase(std::__detail::_Node_const_iterator<std::pair<int const, simplenet::runtime::event_loop::waiter_slot>, false, false>) (6,401x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  524,964 ( 1.73%)  >   ???:simplenet::runtime::event_loop::refresh_interest(int, simplenet::runtime::event_loop::waiter_slot&) (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  447,546 ( 1.48%)  >   ???:simplenet::runtime::event_loop::process_expired_waiters() (40,686x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   25,604 ( 0.08%)  >   ???:simplenet::unique_fd::valid() const (6,401x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   19,203 ( 0.06%)  >   ???:simplenet::epoll::has_event(unsigned int, unsigned int) (6,401x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   12,802 ( 0.04%)  >   ???:simplenet::unique_fd::get() const (6,401x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   12,519 ( 0.04%)  >   ???:simplenet::make_error_from_errno(int) (107x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      870 ( 0.00%)  >   ???:simplenet::runtime::async_accept(simplenet::runtime::async_accept(simplenet::nonblocking::tcp_listener&)::_ZN9simplenet7runtime12async_acceptERNS_11nonblocking12tcp_listenerE.Frame*) [clone .actor] (3x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  981,592 ( 3.24%)  *  ./nptl/./nptl/cancellation.c:__internal_syscall_cancel [/usr/lib/aarch64-linux-gnu/libc.so.6]
+  406,176 ( 1.34%)  >   ./nptl/../sysdeps/unix/sysv/linux/aarch64/syscall_cancel.S:__syscall_cancel_arch (33,848x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+
+  907,801 ( 2.99%)  *  ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+3,161,281,520 (10420.8%)  >   ???:operator delete(void*, unsigned long)'2 (221x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+1,521,133 ( 5.01%)  >   ???:operator delete(void*)'2 (6,376x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+1,033,628 ( 3.41%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .destroy] (6,376x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  848,489 ( 2.80%)  >   ???:simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>) (6,370x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   69,404 ( 0.23%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 (223x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   61,271 ( 0.20%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (328x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   45,209 ( 0.15%)  >   ???:simplenet::runtime::event_loop::cleanup_completed_roots()'2 (853x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   30,576 ( 0.10%)  >   ???:void std::deque<std::__n4861::coroutine_handle<void>, std::allocator<std::__n4861::coroutine_handle<void> > >::_M_push_back_aux<std::__n4861::coroutine_handle<void> const&>(std::__n4861::coroutine_handle<void> const&) (221x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   23,147 ( 0.08%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (79x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    9,383 ( 0.03%)  >   ???:simplenet::runtime::event_loop::process_expired_waiters() (853x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      620 ( 0.00%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor] (2x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  902,199 ( 2.97%)  *  ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+2,214,599,879 (7300.2%)  >   ???:operator delete(void*, unsigned long)'2 (173x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+1,586,847 ( 5.23%)  >   ???:operator delete(void*)'2 (6,356x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+1,029,481 ( 3.39%)  >   ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .destroy] (6,353x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  846,105 ( 2.79%)  >   ???:simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>) (6,352x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   49,211 ( 0.16%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (269x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   37,524 ( 0.12%)  >   ???:simplenet::runtime::event_loop::cleanup_completed_roots()'2 (708x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   33,048 ( 0.11%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 (102x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   24,928 ( 0.08%)  >   ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (164x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   24,110 ( 0.08%)  >   ???:void std::deque<std::__n4861::coroutine_handle<void>, std::allocator<std::__n4861::coroutine_handle<void> > >::_M_push_back_aux<std::__n4861::coroutine_handle<void> const&>(std::__n4861::coroutine_handle<void> const&) (173x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    7,788 ( 0.03%)  >   ???:simplenet::runtime::event_loop::process_expired_waiters() (708x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  794,651 ( 2.62%)  *  ???:simplenet::runtime::event_loop::process_expired_waiters() [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  763,173 ( 2.52%)  *  ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+2,326,453,758 (7668.9%)  >   ???:operator delete(void*, unsigned long)'2 (195x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+1,775,572 ( 5.85%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .destroy] (6,349x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,704,358 ( 5.62%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .destroy] (6,346x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  871,632 ( 2.87%)  >   ???:simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>) (6,400x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  107,194 ( 0.35%)  >   ???:simplenet::runtime::event_loop::cleanup_completed_roots()'2 (764x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   93,544 ( 0.31%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 (295x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   25,776 ( 0.08%)  >   ???:void std::deque<std::__n4861::coroutine_handle<void>, std::allocator<std::__n4861::coroutine_handle<void> > >::_M_push_back_aux<std::__n4861::coroutine_handle<void> const&>(std::__n4861::coroutine_handle<void> const&) (187x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   23,908 ( 0.08%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (139x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   23,392 ( 0.08%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (136x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    8,316 ( 0.03%)  >   ???:simplenet::runtime::event_loop::process_expired_waiters() (756x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    1,450 ( 0.00%)  >   ???:simplenet::unique_fd::~unique_fd() (8x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    1,165 ( 0.00%)  >   ???:operator delete(void*)'2 (8x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+       15 ( 0.00%)  >   ???:simplenet::runtime::event_loop::on_task_completed() (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  703,883 ( 2.32%)  *  ???:simplenet::runtime::wait_readable(simplenet::runtime::wait_readable(int)::_ZN9simplenet7runtime13wait_readableEi.Frame*) [clone .actor]'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+62,921,886,773 (207415.7%)  >   ???:simplenet::runtime::wait_readable(simplenet::runtime::wait_readable(int)::_ZN9simplenet7runtime13wait_readableEi.Frame*) [clone .actor]'2 (4,724x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+24,743,384,766 (81564.1%)  >   ???:simplenet::runtime::event_loop::run()'2 (1,806x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,985,894,500 (6546.3%)  >   ???:operator delete(void*, unsigned long)'2 (151x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+110,666,057 (364.8%)  >   ???:simplenet::runtime::event_loop::cleanup_completed_roots()'2 (6,808x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+5,229,350 (17.24%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 (4x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+2,645,128 ( 8.72%)  >   ???:simplenet::make_error_from_errno(int) (6,401x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,203,698 ( 3.97%)  >   ???:simplenet::runtime::event_loop::consume_wait_result(std::__n4861::coroutine_handle<void>) (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   74,844 ( 0.25%)  >   ???:simplenet::runtime::event_loop::process_expired_waiters() (6,804x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   30,146 ( 0.10%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (108x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   14,008 ( 0.05%)  >   ???:void std::deque<std::__n4861::coroutine_handle<void>, std::allocator<std::__n4861::coroutine_handle<void> > >::_M_push_back_aux<std::__n4861::coroutine_handle<void> const&>(std::__n4861::coroutine_handle<void> const&) (101x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      938 ( 0.00%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor] (2x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      742 ( 0.00%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (4x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      696 ( 0.00%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor] (2x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      304 ( 0.00%)  >   ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (2x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      172 ( 0.00%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  657,058 ( 2.17%)  *  ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+2,206,202,135 (7272.5%)  >   ???:operator delete(void*, unsigned long)'2 (145x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+608,608,042 (2006.2%)  >   ???:simplenet::runtime::wait_readable(simplenet::runtime::wait_readable(int)::_ZN9simplenet7runtime13wait_readableEi.Frame*) [clone .actor]'2 (50x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,668,340 ( 5.50%)  >   ???:simplenet::nonblocking::tcp_stream::read_some(std::span<std::byte, 18446744073709551615ul>) (6,392x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,548,485 ( 5.10%)  >   ???:simplenet::runtime::wait_readable(simplenet::runtime::wait_readable(int)::_ZN9simplenet7runtime13wait_readableEi.Frame*) [clone .destroy] (6,397x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  845,516 ( 2.79%)  >   ???:operator delete(void*)'2 (6,400x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+  123,022 ( 0.41%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (430x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   37,789 ( 0.12%)  >   ???:simplenet::runtime::event_loop::cleanup_completed_roots()'2 (713x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   27,092 ( 0.09%)  >   ???:void std::deque<std::__n4861::coroutine_handle<void>, std::allocator<std::__n4861::coroutine_handle<void> > >::_M_push_back_aux<std::__n4861::coroutine_handle<void> const&>(std::__n4861::coroutine_handle<void> const&) (195x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   17,512 ( 0.06%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (88x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    7,843 ( 0.03%)  >   ???:simplenet::runtime::event_loop::process_expired_waiters() (713x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  639,919 ( 2.11%)  *  ???:simplenet::nonblocking::tcp_stream::read_some(std::span<std::byte, 18446744073709551615ul>) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  767,811 ( 2.53%)  >   ./socket/../sysdeps/unix/sysv/linux/recv.c:recv (12,797x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+  647,212 ( 2.13%)  >   ???:operator new(unsigned long) (6,398x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+  166,348 ( 0.55%)  >   ???:simplenet::error::from_errno(int) (6,398x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   83,174 ( 0.27%)  >   ???:simplenet::nonblocking::is_would_block(simplenet::error const&) (6,398x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   51,192 ( 0.17%)  >   ???:simplenet::unique_fd::valid() const (12,798x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   38,388 ( 0.13%)  >   ./csu/./csu/errno-loc.c:__errno_location (6,398x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+   25,596 ( 0.08%)  >   ???:simplenet::unique_fd::get() const (12,798x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   19,194 ( 0.06%)  >   ???:simplenet::nonblocking::tcp_stream::native_handle() const (6,398x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      838 ( 0.00%)  >   ./elf/../sysdeps/aarch64/dl-trampoline.S:_dl_runtime_resolve (1x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+  545,250 ( 1.80%)  *  ???:simplenet::runtime::event_loop::run()'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+24,770,956,173 (81655.0%)  >   ???:simplenet::epoll::reactor::wait(std::span<simplenet::epoll::ready_event, 18446744073709551615ul>, std::chrono::duration<long, std::ratio<1l, 1000l> >)'2 (1,808x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+15,098,152,311 (49769.5%)  >   ???:simplenet::runtime::wait_readable(simplenet::runtime::wait_readable(int)::_ZN9simplenet7runtime13wait_readableEi.Frame*) [clone .actor]'2 (1,395x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+39,497,776 (130.2%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (4,615x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+27,592,565 (90.96%)  >   ???:simplenet::epoll::reactor::wait(std::span<simplenet::epoll::ready_event, 18446744073709551615ul>, std::chrono::duration<long, std::ratio<1l, 1000l> >) (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+20,369,391 (67.15%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (4,636x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,484,199 ( 4.89%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 (4,603x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,122,752 ( 3.70%)  >   ???:simplenet::runtime::event_loop::cleanup_completed_roots()'2 (21,184x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  867,995 ( 2.86%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (4,614x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  351,424 ( 1.16%)  >   ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (2,312x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  233,024 ( 0.77%)  >   ???:simplenet::runtime::event_loop::process_expired_waiters() (21,184x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   12,049 ( 0.04%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor] (38x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    7,049 ( 0.02%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor] (38x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    2,888 ( 0.01%)  >   ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor] (19x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    2,597 ( 0.01%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor] (14x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  449,874 ( 1.48%)  *  ./elf/./elf/dl-lookup.c:do_lookup_x'2 [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+  597,411 ( 1.97%)  >   ./elf/./elf/dl-lookup.c:do_lookup_x'2 (4,694x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+  200,116 ( 0.66%)  >   ./elf/./elf/dl-lookup.c:check_match (1,942x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+      492 ( 0.00%)  >   ./elf/../sysdeps/nptl/dl-tls_init_tp.c:rtld_mutex_dummy (164x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+      121 ( 0.00%)  >   ./elf/./elf/dl-misc.c:_dl_higher_prime_number (2x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+       26 ( 0.00%)  >   ./elf/./elf/dl-minimal-malloc.c:__minimal_free (2x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+  441,728 ( 1.46%)  *  ???:simplenet::make_error_from_errno(int)'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,185,307 ( 3.91%)  >   ???:simplenet::make_error_from_errno(int)'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  781,044 ( 2.57%)  >   ???:simplenet::runtime::event_loop::arm_waiter(int, std::__n4861::coroutine_handle<void>, bool, std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >, simplenet::error)'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   64,010 ( 0.21%)  >   ???:std::__detail::_Prime_rehash_policy::_M_need_rehash(unsigned long, unsigned long, unsigned long) const (6,401x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+   51,216 ( 0.17%)  >   ???:std::_V2::system_category() (12,804x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+      957 ( 0.00%)  >   ./elf/../sysdeps/aarch64/dl-trampoline.S:_dl_runtime_resolve (1x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+  435,336 ( 1.44%)  *  ???:simplenet::make_error_from_errno(int) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+2,339,373 ( 7.71%)  >   ???:simplenet::runtime::event_loop::wait_for_readable(int, std::__n4861::coroutine_handle<void>, std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >, simplenet::error) (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  569,778 ( 1.88%)  >   ???:simplenet::runtime::event_loop::process_ready_event(simplenet::epoll::ready_event const&)'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   51,216 ( 0.17%)  >   ???:std::_V2::system_category() (12,804x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+
+  416,130 ( 1.37%)  *  ???:simplenet::runtime::event_loop::refresh_interest(int, simplenet::runtime::event_loop::waiter_slot&) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  358,512 ( 1.18%)  >   ???:simplenet::epoll::reactor::add(int, unsigned int) (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  339,306 ( 1.12%)  >   ???:simplenet::epoll::reactor::remove(int) (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   25,608 ( 0.08%)  >   ???:simplenet::runtime::event_loop::arm_waiter(int, std::__n4861::coroutine_handle<void>, bool, std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >, simplenet::error)'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  406,176 ( 1.34%)  *  ./nptl/../sysdeps/unix/sysv/linux/aarch64/syscall_cancel.S:__syscall_cancel_arch [/usr/lib/aarch64-linux-gnu/libc.so.6]
+
+  402,883 ( 1.33%)  *  ./malloc/./malloc/arena.c:free'2
+   99,840 ( 0.33%)  >   ./malloc/./malloc/malloc.c:free'2 (2,158x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+        5 ( 0.00%)  >   ???:__aarch64_cas4_acq (1x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+        5 ( 0.00%)  >   ???:__aarch64_swp4_rel (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  378,784 ( 1.25%)  *  ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,697,737,605 (5596.4%)  >   ???:operator delete(void*, unsigned long)'2 (111x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+  837,703 ( 2.76%)  >   ???:operator delete(void*)'2 (6,344x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+  760,920 ( 2.51%)  >   ???:simplenet::nonblocking::tcp_stream::write_some(std::span<std::byte const, 18446744073709551615ul>) (6,341x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   44,377 ( 0.15%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (223x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   23,638 ( 0.08%)  >   ???:simplenet::runtime::event_loop::cleanup_completed_roots()'2 (446x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   17,024 ( 0.06%)  >   ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (112x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   15,328 ( 0.05%)  >   ???:void std::deque<std::__n4861::coroutine_handle<void>, std::allocator<std::__n4861::coroutine_handle<void> > >::_M_push_back_aux<std::__n4861::coroutine_handle<void> const&>(std::__n4861::coroutine_handle<void> const&) (111x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    4,906 ( 0.02%)  >   ???:simplenet::runtime::event_loop::process_expired_waiters() (446x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  364,800 ( 1.20%)  *  ???:simplenet::nonblocking::tcp_stream::write_some(std::span<std::byte const, 18446744073709551615ul>) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  364,800 ( 1.20%)  >   ./socket/../sysdeps/unix/sysv/linux/send.c:send (6,400x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+   25,600 ( 0.08%)  >   ???:simplenet::unique_fd::valid() const (6,400x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   12,800 ( 0.04%)  >   ???:simplenet::unique_fd::get() const (6,400x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  343,044 ( 1.13%)  *  ./nptl/./nptl/cancellation.c:__syscall_cancel [/usr/lib/aarch64-linux-gnu/libc.so.6]
+1,387,768 ( 4.57%)  >   ./nptl/./nptl/cancellation.c:__internal_syscall_cancel (33,848x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+
+  316,370 ( 1.04%)  *  ./elf/../sysdeps/generic/dl-new-hash.h:_dl_lookup_symbol_x'2
+
+  300,894 ( 0.99%)  *  ???:simplenet::runtime::event_loop::arm_waiter(int, std::__n4861::coroutine_handle<void>, bool, std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >, simplenet::error) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,891,233 ( 6.23%)  >   ???:operator new(unsigned long) (6,402x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+   32,010 ( 0.11%)  >   ???:simplenet::epoll::reactor::valid() const (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  281,739 ( 0.93%)  *  ???:simplenet::epoll::reactor::add(int, unsigned int) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   38,412 ( 0.13%)  >   ./misc/../sysdeps/unix/syscall-template.S:epoll_ctl (6,402x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+   25,612 ( 0.08%)  >   ???:simplenet::unique_fd::valid() const (6,403x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   12,806 ( 0.04%)  >   ???:simplenet::unique_fd::get() const (6,403x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      868 ( 0.00%)  >   ./elf/../sysdeps/aarch64/dl-trampoline.S:_dl_runtime_resolve'2 (1x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+        3 ( 0.00%)  >   ???:simplenet::unique_fd::~unique_fd() (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  275,490 ( 0.91%)  *  ???:operator delete(void*)'2 [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+15,142,429,659 (49915.5%)  >   ./malloc/./malloc/malloc.c:free'2 (45,915x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+
+  259,251 ( 0.85%)  *  ???:std::chrono::_V2::steady_clock::now() [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+  364,800 ( 1.20%)  >   ./socket/../sysdeps/unix/sysv/linux/recv.c:recv (6,400x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+  364,743 ( 1.20%)  >   ./socket/../sysdeps/unix/sysv/linux/send.c:send (6,399x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+   35,190 ( 0.12%)  >   ???:std::chrono::_V2::steady_clock::now()'2 (1x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+    1,638 ( 0.01%)  >   ./elf/../sysdeps/aarch64/dl-trampoline.S:_dl_runtime_resolve'2 (2x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+  243,276 ( 0.80%)  *  ???:simplenet::epoll::reactor::remove(int) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   38,412 ( 0.13%)  >   ./misc/../sysdeps/unix/syscall-template.S:epoll_ctl (6,402x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+   25,608 ( 0.08%)  >   ???:simplenet::unique_fd::valid() const (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   19,206 ( 0.06%)  >   ???:simplenet::runtime::event_loop::refresh_interest(int, simplenet::runtime::event_loop::waiter_slot&)'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   12,804 ( 0.04%)  >   ???:simplenet::unique_fd::get() const (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  230,151 ( 0.76%)  *  ???:std::__detail::_Map_base<unsigned long, std::pair<unsigned long const, std::expected<void, simplenet::error> >, std::allocator<std::pair<unsigned long const, std::expected<void, simplenet::error> > >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](unsigned long&&) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  780,038 ( 2.57%)  >   ???:operator new(unsigned long) (6,402x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+  736,515 ( 2.43%)  >   ???:simplenet::make_error_from_errno(int) (6,295x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   27,562 ( 0.09%)  >   ???:void std::deque<std::__n4861::coroutine_handle<void>, std::allocator<std::__n4861::coroutine_handle<void> > >::_M_push_back_aux<std::__n4861::coroutine_handle<void> const&>(std::__n4861::coroutine_handle<void> const&) (107x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  217,600 ( 0.72%)  *  ???:simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  600,848 ( 1.98%)  >   ???:operator new(unsigned long) (6,392x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+   51,200 ( 0.17%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 (6,400x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    1,984 ( 0.01%)  >   ???:operator new(unsigned long)'2 (8x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+
+  217,600 ( 0.72%)  *  ???:simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  604,287 ( 1.99%)  >   ???:operator new(unsigned long) (6,400x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+   32,000 ( 0.11%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (6,400x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  217,600 ( 0.72%)  *  ???:simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  601,600 ( 1.98%)  >   ???:operator new(unsigned long) (6,400x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+   51,200 ( 0.17%)  >   ???:(anonymous namespace)::run_echo_session((anonymous namespace)::run_echo_session(simplenet::nonblocking::tcp_stream, unsigned long, unsigned long, std::atomic<bool>&, std::mutex&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)::_ZN12_GLOBAL__N_116run_echo_sessionEN9simplenet11nonblocking10tcp_streamEmmRSt6atomicIbERSt5mutexRNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE.Frame*) [clone .actor]'2 (6,400x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  217,600 ( 0.72%)  *  ???:simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  602,889 ( 1.99%)  >   ???:operator new(unsigned long) (6,400x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+   32,000 ( 0.11%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (6,400x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  192,060 ( 0.63%)  *  ???:simplenet::runtime::event_loop::arm_waiter(int, std::__n4861::coroutine_handle<void>, bool, std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >, simplenet::error)'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  755,436 ( 2.49%)  >   ???:simplenet::runtime::event_loop::arm_waiter(int, std::__n4861::coroutine_handle<void>, bool, std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >, simplenet::error)'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  614,592 ( 2.03%)  >   ???:simplenet::runtime::event_loop::refresh_interest(int, simplenet::runtime::event_loop::waiter_slot&) (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  186,528 ( 0.61%)  *  ???:simplenet::unique_fd::valid() const [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  185,658 ( 0.61%)  *  ???:simplenet::runtime::event_loop::consume_wait_result(std::__n4861::coroutine_handle<void>)'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  736,352 ( 2.43%)  >   ???:simplenet::runtime::event_loop::consume_wait_result(std::__n4861::coroutine_handle<void>)'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  690,998 ( 2.28%)  >   ???:operator delete(void*, unsigned long)'2 (6,397x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+      540 ( 0.00%)  >   ???:operator delete(void*, unsigned long) (5x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+
+  162,253 ( 0.53%)  *  ???:simplenet::epoll::reactor::wait(std::span<simplenet::epoll::ready_event, 18446744073709551615ul>, std::chrono::duration<long, std::ratio<1l, 1000l> >)'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+24,770,665,624 (81654.0%)  >   ???:simplenet::runtime::event_loop::process_ready_event(simplenet::epoll::ready_event const&)'2 (1,808x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  117,520 ( 0.39%)  >   ./misc/../sysdeps/unix/sysv/linux/epoll_wait.c:epoll_wait (1,808x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+    7,232 ( 0.02%)  >   ???:simplenet::unique_fd::valid() const (1,808x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    3,618 ( 0.01%)  >   ???:simplenet::unique_fd::get() const (1,809x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    1,406 ( 0.00%)  >   ???:operator new(unsigned long) (1x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+      850 ( 0.00%)  >   ./elf/../sysdeps/aarch64/dl-trampoline.S:_dl_runtime_resolve'2 (1x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+  160,050 ( 0.53%)  *  ???:simplenet::runtime::event_loop::consume_wait_result(std::__n4861::coroutine_handle<void>) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  877,196 ( 2.89%)  >   ???:simplenet::runtime::event_loop::consume_wait_result(std::__n4861::coroutine_handle<void>)'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  166,452 ( 0.55%)  >   ???:simplenet::runtime::wait_readable(simplenet::runtime::wait_readable(int)::_ZN9simplenet7runtime13wait_readableEi.Frame*) [clone .actor]'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+  140,844 ( 0.46%)  *  ???:simplenet::runtime::wait_readable(simplenet::runtime::wait_readable(int)::_ZN9simplenet7runtime13wait_readableEi.Frame*) [clone .destroy] [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,407,751 ( 4.64%)  >   ???:operator delete(void*)'2 (6,397x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+    1,312 ( 0.00%)  >   ???:operator delete(void*) (5x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+
+  134,386 ( 0.44%)  *  ./socket/../sysdeps/unix/sysv/linux/recv.c:recv [/usr/lib/aarch64-linux-gnu/libc.so.6]
+  998,288 ( 3.29%)  >   ./nptl/./nptl/cancellation.c:__syscall_cancel (19,198x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+
+  128,040 ( 0.42%)  *  ???:std::_V2::system_category() [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+
+  128,040 ( 0.42%)  *  ???:std::__detail::_Prime_rehash_policy::_M_need_rehash(unsigned long, unsigned long, unsigned long) const [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+
+  119,402 ( 0.39%)  *  ./elf/./elf/dl-lookup.c:do_lookup_x [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+  672,559 ( 2.22%)  >   ./elf/./elf/dl-lookup.c:do_lookup_x'2 (1,963x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+      244 ( 0.00%)  >   ./elf/./elf/dl-lookup.c:_dl_lookup_symbol_x'2 (22x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+  115,253 ( 0.38%)  *  ???:simplenet::error::from_errno(int) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   25,604 ( 0.08%)  >   ???:std::_V2::system_category() (6,401x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+   25,592 ( 0.08%)  >   ???:simplenet::nonblocking::tcp_stream::read_some(std::span<std::byte, 18446744073709551615ul>)'2 (6,398x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+      782 ( 0.00%)  >   ./elf/../sysdeps/aarch64/dl-trampoline.S:_dl_runtime_resolve (1x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+   98,537 ( 0.32%)  *  ./elf/./elf/dl-lookup.c:_dl_lookup_symbol_x'2 [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+  796,131 ( 2.62%)  >   ./elf/./elf/dl-lookup.c:do_lookup_x (1,963x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+  759,730 ( 2.50%)  >   ./elf/./elf/dl-lookup.c:_dl_lookup_symbol_x'2 (1,847x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+   97,965 ( 0.32%)  *  ./elf/./elf/dl-lookup.c:check_match [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+  101,220 ( 0.33%)  >   ./string/../sysdeps/aarch64/strcmp.S:strcmp (2,078x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+      756 ( 0.00%)  >   ./elf/./elf/dl-lookup.c:check_match'2 (9x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+      175 ( 0.00%)  >   ./elf/./elf/dl-lookup.c:do_lookup_x'2 (5x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+   96,030 ( 0.32%)  *  ???:simplenet::runtime::event_loop::wait_for_readable(int, std::__n4861::coroutine_handle<void>, std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >, simplenet::error) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+2,224,137 ( 7.33%)  >   ???:simplenet::runtime::event_loop::arm_waiter(int, std::__n4861::coroutine_handle<void>, bool, std::optional<std::chrono::duration<long, std::ratio<1l, 1000l> > >, simplenet::error) (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   19,206 ( 0.06%)  >   ???:simplenet::runtime::wait_readable(simplenet::runtime::wait_readable(int)::_ZN9simplenet7runtime13wait_readableEi.Frame*) [clone .actor]'2 (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   93,266 ( 0.31%)  *  ???:simplenet::unique_fd::get() const [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    1,627 ( 0.01%)  >   ???:simplenet::nonblocking::tcp_listener::bind(simplenet::blocking::endpoint const&, int)'2 (1x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   89,600 ( 0.30%)  *  ./socket/../sysdeps/unix/sysv/linux/send.c:send [/usr/lib/aarch64-linux-gnu/libc.so.6]
+  640,000 ( 2.11%)  >   ./nptl/./nptl/cancellation.c:__syscall_cancel (12,800x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+
+   86,951 ( 0.29%)  *  ./elf/./elf/dl-reloc.c:_dl_relocate_object_no_relro'2 [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+1,565,924,485 (5161.9%)  >   ./elf/../sysdeps/aarch64/dl-machine.h:_dl_relocate_object_no_relro'2 (1,626x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+1,174,277,792 (3870.9%)  >   ./elf/./elf/dl-reloc.c:_dl_relocate_object_no_relro'2 (1,851x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+1,112,950,043 (3668.7%)  >   ./elf/./elf/dl-lookup.c:_dl_lookup_symbol_x'2 (1,768x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+1,461,631 ( 4.82%)  >   ./elf/./elf/dl-lookup.c:_dl_lookup_symbol_x (8x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+1,405,619 ( 4.63%)  >   ./elf/../sysdeps/aarch64/dl-machine.h:_dl_relocate_object_no_relro (3x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+   90,624 ( 0.30%)  >   ./elf/../sysdeps/generic/ldsodefs.h:_dl_relocate_object_no_relro (3x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+   83,460 ( 0.28%)  *  ???:operator delete(void*, unsigned long)'2 [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+15,136,480,946 (49895.9%)  >   ???:operator delete(void*)'2 (13,910x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+
+   76,830 ( 0.25%)  *  ./misc/../sysdeps/unix/syscall-template.S:epoll_ctl [/usr/lib/aarch64-linux-gnu/libc.so.6]
+
+   70,422 ( 0.23%)  *  ???:simplenet::nonblocking::is_would_block(simplenet::error const&) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   12,804 ( 0.04%)  >   ???:simplenet::error::value() const (6,402x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   65,721 ( 0.22%)  *  ./elf/../sysdeps/aarch64/dl-machine.h:_dl_relocate_object_no_relro'2 [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+1,379,206 ( 4.55%)  >   ./elf/../sysdeps/generic/ldsodefs.h:_dl_relocate_object_no_relro (4x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+       26 ( 0.00%)  >   ./elf/./elf/do-rel.h:_dl_relocate_object_no_relro'2 (1x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+       26 ( 0.00%)  >   ./elf/./elf/do-rel.h:_dl_relocate_object_no_relro (1x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+   58,759 ( 0.19%)  *  ./string/../sysdeps/aarch64/strcmp.S:strcmp [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+   55,634 ( 0.18%)  >   ./string/../sysdeps/aarch64/strcmp.S:strcmp'2 (1,973x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+   57,618 ( 0.19%)  *  ???:std::__detail::_Map_base<unsigned long, std::pair<unsigned long const, std::expected<void, simplenet::error> >, std::allocator<std::pair<unsigned long const, std::expected<void, simplenet::error> > >, std::__detail::_Select1st, std::equal_to<unsigned long>, std::hash<unsigned long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](unsigned long&&)'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   55,767 ( 0.18%)  *  ./elf/../sysdeps/aarch64/dl-machine.h:_dl_lookup_symbol_x'2
+  634,764 ( 2.09%)  >   ./elf/../sysdeps/aarch64/dl-machine.h:_dl_relocate_object_no_relro'2 (17x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+    1,922 ( 0.01%)  >   ./elf/../sysdeps/aarch64/dl-machine.h:_dl_relocate_object_no_relro (1x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+      680 ( 0.00%)  >   ./elf/./elf/do-rel.h:_dl_relocate_object_no_relro (1x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+       81 ( 0.00%)  >   ./elf/./elf/do-rel.h:_dl_relocate_object_no_relro'2 (1x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+   55,634 ( 0.18%)  *  ./string/../sysdeps/aarch64/strcmp.S:strcmp'2 [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+   49,107 ( 0.16%)  *  ???:void std::deque<std::__n4861::coroutine_handle<void>, std::allocator<std::__n4861::coroutine_handle<void> > >::_M_push_back_aux<std::__n4861::coroutine_handle<void> const&>(std::__n4861::coroutine_handle<void> const&) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   74,509 ( 0.25%)  >   ???:operator new(unsigned long) (826x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+   28,770 ( 0.09%)  >   ???:void std::deque<std::__n4861::coroutine_handle<void>, std::allocator<std::__n4861::coroutine_handle<void> > >::_M_push_back_aux<std::__n4861::coroutine_handle<void> const&>(std::__n4861::coroutine_handle<void> const&)'2 (274x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   12,947 ( 0.04%)  >   ???:simplenet::runtime::event_loop::process_ready_event(simplenet::epoll::ready_event const&)'2 (107x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   44,819 ( 0.15%)  *  ???:std::_Hashtable<int, std::pair<int const, simplenet::runtime::event_loop::waiter_slot>, std::allocator<std::pair<int const, simplenet::runtime::event_loop::waiter_slot> >, std::__detail::_Select1st, std::equal_to<int>, std::hash<int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::erase(std::__detail::_Node_const_iterator<std::pair<int const, simplenet::runtime::event_loop::waiter_slot>, false, false>) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+  665,471 ( 2.19%)  >   ???:operator delete(void*, unsigned long)'2 (6,397x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+    1,429 ( 0.00%)  >   ./elf/../sysdeps/aarch64/dl-trampoline.S:_dl_runtime_resolve (1x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+      416 ( 0.00%)  >   ???:operator delete(void*, unsigned long) (4x) [/usr/lib/aarch64-linux-gnu/libstdc++.so.6.0.33]
+
+   38,430 ( 0.13%)  *  ./csu/./csu/errno-loc.c:__errno_location [/usr/lib/aarch64-linux-gnu/libc.so.6]
+
+   35,444 ( 0.12%)  *  ./elf/./elf/do-rel.h:_dl_lookup_symbol_x'2
+675,102,461 (2225.4%)  >   ./elf/./elf/dl-reloc.c:_dl_relocate_object_no_relro'2 (1,198x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+   36,405 ( 0.12%)  >   ./elf/./elf/do-rel.h:_dl_relocate_object_no_relro'2 (3x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+   23,056 ( 0.08%)  >   ./elf/./elf/do-rel.h:_dl_relocate_object_no_relro (2x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+   35,087 ( 0.12%)  *  ./elf/./elf/dl-reloc.c:_dl_lookup_symbol_x'2
+435,884,227 (1436.8%)  >   ./elf/./elf/dl-reloc.c:_dl_relocate_object_no_relro'2 (544x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+  378,122 ( 1.25%)  >   ./elf/./elf/dl-lookup.c:_dl_lookup_symbol_x'2 (51x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+   34,301 ( 0.11%)  *  ./elf/./elf/do-rel.h:_dl_relocate_object_no_relro'2 [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+437,818,240 (1443.2%)  >   ./elf/./elf/dl-reloc.c:_dl_relocate_object_no_relro'2 (562x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+  565,914 ( 1.87%)  >   ./elf/./elf/do-rel.h:_dl_relocate_object_no_relro'2 (11x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+   18,714 ( 0.06%)  >   ./elf/../sysdeps/aarch64/dl-machine.h:_dl_relocate_object_no_relro'2 (4x) [/usr/lib/aarch64-linux-gnu/ld-linux-aarch64.so.1]
+
+   25,600 ( 0.08%)  *  ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .destroy] [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,686,909 ( 5.56%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (6,376x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    6,345 ( 0.02%)  >   ???:simplenet::runtime::async_read_exact(simplenet::runtime::async_read_exact(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_read_exactERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor] (24x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   25,600 ( 0.08%)  *  ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .destroy] [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,011,916 ( 3.34%)  >   ???:simplenet::runtime::async_read_some(simplenet::runtime::async_read_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_read_someERNS_11nonblocking10tcp_streamESt4spanISt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (6,400x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   25,600 ( 0.08%)  *  ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .destroy] [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,752,103 ( 5.78%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (6,356x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+   12,119 ( 0.04%)  >   ???:simplenet::runtime::async_write_all(simplenet::runtime::async_write_all(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime15async_write_allERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor] (44x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   25,600 ( 0.08%)  *  ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .destroy] [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+1,002,647 ( 3.31%)  >   ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor]'2 (6,344x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+    8,848 ( 0.03%)  >   ???:simplenet::runtime::async_write_some(simplenet::runtime::async_write_some(simplenet::nonblocking::tcp_stream&, std::span<std::byte const, 18446744073709551615ul>)::_ZN9simplenet7runtime16async_write_someERNS_11nonblocking10tcp_streamESt4spanIKSt4byteLm18446744073709551615EE.Frame*) [clone .actor] (56x) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   25,592 ( 0.08%)  *  ???:simplenet::nonblocking::tcp_stream::read_some(std::span<std::byte, 18446744073709551615ul>)'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   21,708 ( 0.07%)  *  ./misc/../sysdeps/unix/sysv/linux/epoll_pwait.c:epoll_pwait [/usr/lib/aarch64-linux-gnu/libc.so.6]
+   90,450 ( 0.30%)  >   ./nptl/./nptl/cancellation.c:__syscall_cancel (1,809x) [/usr/lib/aarch64-linux-gnu/libc.so.6]
+
+   19,206 ( 0.06%)  *  ???:simplenet::epoll::has_event(unsigned int, unsigned int) [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   19,206 ( 0.06%)  *  ???:simplenet::runtime::event_loop::refresh_interest(int, simplenet::runtime::event_loop::waiter_slot&)'2 [/workspaces/libsimplenet/build-perf/example/simplenet_perf_async_echo_libsimplenet]
+
+   16,597 ( 0.05%)  *  ./elf/../sysdeps/generic/dl-new-hash.h:_dl_lookup_symbol_x
+
+--------------------------------------------------------------------------------
+The following files chosen for auto-annotation could not be found:
+--------------------------------------------------------------------------------
+  ./csu/./csu/errno-loc.c
+  ./elf/../sysdeps/aarch64/dl-machine.h
+  ./elf/../sysdeps/generic/dl-new-hash.h
+  ./elf/./elf/dl-lookup.c
+  ./elf/./elf/dl-reloc.c
+  ./elf/./elf/do-rel.h
+  ./malloc/./malloc/arena.c
+  ./malloc/./malloc/malloc.c
+  ./misc/../sysdeps/unix/syscall-template.S
+  ./misc/../sysdeps/unix/sysv/linux/epoll_pwait.c
+  ./nptl/../sysdeps/unix/sysv/linux/aarch64/syscall_cancel.S
+  ./nptl/./nptl/cancellation.c
+  ./socket/../sysdeps/unix/sysv/linux/recv.c
+  ./socket/../sysdeps/unix/sysv/linux/send.c
+  ./string/../sysdeps/aarch64/strcmp.S
+

@@ -1,0 +1,26 @@
+
+ Performance counter stats for './build-perf/example/simplenet_perf_async_echo_boost_asio --iterations 2000 --payload-size 1024 --connections 8' (5 runs):
+
+             81.46 msec task-clock:u                     #    1.042 CPUs utilized               ( +-  1.12% )
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+               126      page-faults:u                    #    1.547 K/sec                       ( +-  0.16% )
+   <not supported>      cycles:u                                                              
+   <not supported>      instructions:u                                                        
+   <not supported>      branches:u                                                            
+   <not supported>      branch-misses:u                                                       
+   <not supported>      L1-dcache-loads:u                                                     
+   <not supported>      L1-dcache-load-misses:u                                               
+   <not supported>      LLC-loads:u                                                           
+   <not supported>      LLC-load-misses:u                                                     
+   <not supported>      L1-icache-loads:u                                                     
+   <not supported>      L1-icache-load-misses:u                                               
+   <not supported>      dTLB-loads:u                                                          
+   <not supported>      dTLB-load-misses:u                                                    
+   <not supported>      iTLB-loads:u                                                          
+   <not supported>      iTLB-load-misses:u                                                    
+   <not supported>      L1-dcache-prefetches:u                                                
+   <not supported>      L1-dcache-prefetch-misses:u                                           
+
+          0.078159 +- 0.000733 seconds time elapsed  ( +-  0.94% )
+

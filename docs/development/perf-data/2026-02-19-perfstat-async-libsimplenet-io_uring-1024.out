@@ -1,0 +1,5 @@
+PERF,impl=libsimplenet,scenario=async_tcp_echo,backend=io_uring,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,uring_queue_depth=512,total_ms=79.339,echoes_per_sec=201665.736,mb_per_sec=413.011
+PERF,impl=libsimplenet,scenario=async_tcp_echo,backend=io_uring,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,uring_queue_depth=512,total_ms=83.563,echoes_per_sec=191473.065,mb_per_sec=392.137
+PERF,impl=libsimplenet,scenario=async_tcp_echo,backend=io_uring,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,uring_queue_depth=512,total_ms=80.350,echoes_per_sec=199130.048,mb_per_sec=407.818
+PERF,impl=libsimplenet,scenario=async_tcp_echo,backend=io_uring,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,uring_queue_depth=512,total_ms=82.701,echoes_per_sec=193468.134,mb_per_sec=396.223
+PERF,impl=libsimplenet,scenario=async_tcp_echo,backend=io_uring,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,uring_queue_depth=512,total_ms=79.496,echoes_per_sec=201268.517,mb_per_sec=412.198

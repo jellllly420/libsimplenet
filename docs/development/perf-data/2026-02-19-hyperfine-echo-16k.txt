@@ -1,0 +1,11 @@
+Benchmark 1: ./build-perf/example/simplenet_perf_tcp_echo_libsimplenet --iterations 2000 --payload-size 16384 --connections 8 >/tmp/snet_echo16k.out
+  Time (mean ± σ):     155.3 ms ±   7.5 ms    [User: 27.3 ms, System: 265.5 ms]
+  Range (min … max):   143.5 ms … 164.2 ms    6 runs
+ 
+Benchmark 2: ./build-perf/example/simplenet_perf_tcp_echo_boost_asio --iterations 2000 --payload-size 16384 --connections 8 >/tmp/boost_echo16k.out
+  Time (mean ± σ):     152.4 ms ±   5.3 ms    [User: 19.4 ms, System: 273.4 ms]
+  Range (min … max):   144.8 ms … 158.7 ms    6 runs
+ 
+Summary
+  ./build-perf/example/simplenet_perf_tcp_echo_boost_asio --iterations 2000 --payload-size 16384 --connections 8 >/tmp/boost_echo16k.out ran
+    1.02 ± 0.06 times faster than ./build-perf/example/simplenet_perf_tcp_echo_libsimplenet --iterations 2000 --payload-size 16384 --connections 8 >/tmp/snet_echo16k.out

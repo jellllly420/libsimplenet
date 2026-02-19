@@ -1,0 +1,5 @@
+PERF,impl=boost_asio,scenario=async_tcp_echo,backend=epoll,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,total_ms=78.580,echoes_per_sec=203614.475,mb_per_sec=417.002
+PERF,impl=boost_asio,scenario=async_tcp_echo,backend=epoll,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,total_ms=75.317,echoes_per_sec=212434.382,mb_per_sec=435.066
+PERF,impl=boost_asio,scenario=async_tcp_echo,backend=epoll,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,total_ms=77.552,echoes_per_sec=206313.183,mb_per_sec=422.529
+PERF,impl=boost_asio,scenario=async_tcp_echo,backend=epoll,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,total_ms=75.173,echoes_per_sec=212841.788,mb_per_sec=435.900
+PERF,impl=boost_asio,scenario=async_tcp_echo,backend=epoll,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,total_ms=77.647,echoes_per_sec=206060.651,mb_per_sec=422.012

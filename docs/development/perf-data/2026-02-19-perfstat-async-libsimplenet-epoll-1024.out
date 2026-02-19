@@ -1,0 +1,5 @@
+PERF,impl=libsimplenet,scenario=async_tcp_echo,backend=epoll,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,uring_queue_depth=512,total_ms=88.600,echoes_per_sec=180586.481,mb_per_sec=369.841
+PERF,impl=libsimplenet,scenario=async_tcp_echo,backend=epoll,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,uring_queue_depth=512,total_ms=83.074,echoes_per_sec=192598.305,mb_per_sec=394.441
+PERF,impl=libsimplenet,scenario=async_tcp_echo,backend=epoll,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,uring_queue_depth=512,total_ms=87.841,echoes_per_sec=182147.720,mb_per_sec=373.039
+PERF,impl=libsimplenet,scenario=async_tcp_echo,backend=epoll,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,uring_queue_depth=512,total_ms=82.875,echoes_per_sec=193061.742,mb_per_sec=395.390
+PERF,impl=libsimplenet,scenario=async_tcp_echo,backend=epoll,iterations=2000,payload_size=1024,connections=8,echoes=16000,bytes=32768000,uring_queue_depth=512,total_ms=84.933,echoes_per_sec=188384.523,mb_per_sec=385.812

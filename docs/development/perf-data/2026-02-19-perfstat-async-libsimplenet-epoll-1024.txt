@@ -1,0 +1,26 @@
+
+ Performance counter stats for './build-perf/example/simplenet_perf_async_echo_libsimplenet --backend epoll --iterations 2000 --payload-size 1024 --connections 8' (5 runs):
+
+             89.25 msec task-clock:u                     #    1.027 CPUs utilized               ( +-  1.78% )
+                 0      context-switches:u               #    0.000 /sec                      
+                 0      cpu-migrations:u                 #    0.000 /sec                      
+               130      page-faults:u                    #    1.457 K/sec                     
+   <not supported>      cycles:u                                                              
+   <not supported>      instructions:u                                                        
+   <not supported>      branches:u                                                            
+   <not supported>      branch-misses:u                                                       
+   <not supported>      L1-dcache-loads:u                                                     
+   <not supported>      L1-dcache-load-misses:u                                               
+   <not supported>      LLC-loads:u                                                           
+   <not supported>      LLC-load-misses:u                                                     
+   <not supported>      L1-icache-loads:u                                                     
+   <not supported>      L1-icache-load-misses:u                                               
+   <not supported>      dTLB-loads:u                                                          
+   <not supported>      dTLB-load-misses:u                                                    
+   <not supported>      iTLB-loads:u                                                          
+   <not supported>      iTLB-load-misses:u                                                    
+   <not supported>      L1-dcache-prefetches:u                                                
+   <not supported>      L1-dcache-prefetch-misses:u                                           
+
+           0.08692 +- 0.00131 seconds time elapsed  ( +-  1.50% )
+

@@ -1,0 +1,11 @@
+Benchmark 1: ./build-perf/example/simplenet_perf_reactor_wait 300000 --mode reuse >/tmp/snet_idle_reuse.out
+  Time (mean ± σ):      35.8 ms ±   3.2 ms    [User: 12.3 ms, System: 22.8 ms]
+  Range (min … max):    32.1 ms …  42.5 ms    8 runs
+ 
+Benchmark 2: ./build-perf/example/simplenet_perf_boost_asio_wait 300000 >/tmp/boost_idle.out
+  Time (mean ± σ):      48.5 ms ±  10.4 ms    [User: 19.4 ms, System: 28.2 ms]
+  Range (min … max):    38.5 ms …  67.9 ms    8 runs
+ 
+Summary
+  ./build-perf/example/simplenet_perf_reactor_wait 300000 --mode reuse >/tmp/snet_idle_reuse.out ran
+    1.36 ± 0.32 times faster than ./build-perf/example/simplenet_perf_boost_asio_wait 300000 >/tmp/boost_idle.out
