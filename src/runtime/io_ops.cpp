@@ -11,6 +11,21 @@ namespace {
 
 using namespace std::chrono_literals;
 
+[[nodiscard]] int get_sleep_timerfd() noexcept {
+    struct SleepTimerFd {
+        simplenet::unique_fd fd{};
+        SleepTimerFd() {
+            const int raw =
+                ::timerfd_create(CLOCK_MONOTONIC, TFD_CLOEXEC | TFD_NONBLOCK);
+            if (raw >= 0) {
+                fd = simplenet::unique_fd{raw};
+            }
+        }
+    };
+    thread_local SleepTimerFd state{};
+    return state.fd.get();
+}
+
 class readiness_wait_awaitable {
 public:
     readiness_wait_awaitable(int fd, bool readable,
@@ -188,59 +203,33 @@ task<result<std::size_t>> async_write_some(simplenet::nonblocking::tcp_stream& s
 
 task<result<void>> async_read_exact(simplenet::nonblocking::tcp_stream& stream,
                                     std::span<std::byte> buffer) {
-    std::size_t read_total = 0;
-    while (read_total < buffer.size()) {
-        while (true) {
-            auto read_result = stream.read_some(buffer.subspan(read_total));
-            if (read_result.has_value()) {
-                if (read_result.value() == 0U) {
-                    co_return err<void>(make_error_from_errno(ECONNRESET));
-                }
-
-                read_total += read_result.value();
-                break;
-            }
-
-            if (!simplenet::nonblocking::is_would_block(read_result.error())) {
-                co_return err<void>(read_result.error());
-            }
-
-            const auto wait_result = co_await wait_readable(stream.native_handle());
-            if (!wait_result.has_value()) {
-                co_return err<void>(wait_result.error());
-            }
+    std::size_t total = 0;
+    while (total < buffer.size()) {
+        auto r = co_await async_read_some(stream, buffer.subspan(total));
+        if (!r.has_value()) {
+            co_return err<void>(r.error());
         }
+        if (r.value() == 0U) {
+            co_return err<void>(make_error_from_errno(ECONNRESET));
+        }
+        total += r.value();
     }
-
     co_return ok();
 }
 
 task<result<void>> async_write_all(simplenet::nonblocking::tcp_stream& stream,
                                    std::span<const std::byte> buffer) {
-    std::size_t written_total = 0;
-    while (written_total < buffer.size()) {
-        while (true) {
-            auto write_result = stream.write_some(buffer.subspan(written_total));
-            if (write_result.has_value()) {
-                if (write_result.value() == 0U) {
-                    co_return err<void>(make_error_from_errno(EPIPE));
-                }
-
-                written_total += write_result.value();
-                break;
-            }
-
-            if (!simplenet::nonblocking::is_would_block(write_result.error())) {
-                co_return err<void>(write_result.error());
-            }
-
-            const auto wait_result = co_await wait_writable(stream.native_handle());
-            if (!wait_result.has_value()) {
-                co_return err<void>(wait_result.error());
-            }
+    std::size_t total = 0;
+    while (total < buffer.size()) {
+        auto r = co_await async_write_some(stream, buffer.subspan(total));
+        if (!r.has_value()) {
+            co_return err<void>(r.error());
         }
+        if (r.value() == 0U) {
+            co_return err<void>(make_error_from_errno(EPIPE));
+        }
+        total += r.value();
     }
-
     co_return ok();
 }
 
@@ -253,13 +242,11 @@ task<result<void>> async_sleep(std::chrono::milliseconds duration,
         co_return ok();
     }
 
-    const int timer_fd =
-        ::timerfd_create(CLOCK_MONOTONIC, TFD_CLOEXEC | TFD_NONBLOCK);
+    const int timer_fd = get_sleep_timerfd();
     if (timer_fd < 0) {
         co_return err<void>(error::from_errno());
     }
 
-    simplenet::unique_fd timer{timer_fd};
     const auto deadline = std::chrono::steady_clock::now() + duration;
 
     while (true) {
@@ -283,18 +270,18 @@ task<result<void>> async_sleep(std::chrono::milliseconds duration,
         spec.it_value.tv_sec = static_cast<std::time_t>(slice.count() / 1000);
         spec.it_value.tv_nsec =
             static_cast<long>((slice.count() % 1000) * 1000000L);
-        if (::timerfd_settime(timer.get(), 0, &spec, nullptr) != 0) {
+        if (::timerfd_settime(timer_fd, 0, &spec, nullptr) != 0) {
             co_return err<void>(error::from_errno());
         }
 
-        const auto wait_result = co_await wait_readable(timer.get());
+        const auto wait_result = co_await wait_readable(timer_fd);
         if (!wait_result.has_value()) {
             co_return err<void>(wait_result.error());
         }
 
         std::uint64_t expirations = 0;
         const auto read_count =
-            ::read(timer.get(), &expirations, sizeof(expirations));
+            ::read(timer_fd, &expirations, sizeof(expirations));
         if (read_count < 0) {
             if (errno == EINTR || errno == EAGAIN || errno == EWOULDBLOCK) {
                 continue;

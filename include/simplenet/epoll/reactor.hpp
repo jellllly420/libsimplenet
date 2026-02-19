@@ -75,7 +75,9 @@ private:
  * @param event_mask Mask to inspect.
  * @param flag Event flag.
  */
-[[nodiscard]] bool has_event(std::uint32_t event_mask,
-                             std::uint32_t flag) noexcept;
+[[nodiscard]] constexpr bool has_event(std::uint32_t event_mask,
+                                       std::uint32_t flag) noexcept {
+    return (event_mask & flag) != 0U;
+}
 
 } // namespace simplenet::epoll

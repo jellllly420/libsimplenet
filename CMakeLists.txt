@@ -58,6 +58,7 @@ set_target_properties(simplenet_core PROPERTIES EXPORT_NAME core)
 
 add_library(
   simplenet_blocking
+  src/blocking/endpoint.cpp
   src/blocking/socket_helpers.cpp
   src/blocking/tcp.cpp
   src/blocking/udp.cpp

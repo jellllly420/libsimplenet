@@ -130,17 +130,17 @@ Latest persisted output:
 - Benchmark artifacts and history: `docs/development/perf-data/`
 - Methodology and iteration logs: `docs/development/performance-lab-log.md`
 
-### Core Scenario Matrix (Recent Baseline, Median of 6 Alternating Runs)
+### Core Scenario Matrix (Baseline 2026-02-20, Median of 6 Alternating Runs)
 
 | Scenario | libsimplenet | Boost.Asio | Relative (Paired Median Ratio) |
 | --- | ---: | ---: | ---: |
-| `idle_wait` (`avg_ns_per_wait`) | `102.506` | `121.499` | libsimplenet `~1.15x` faster |
-| `tcp_echo` payload `64` (`total_ms`) | `132.826` | `132.773` | Boost.Asio `~1.00x` faster |
-| `tcp_echo` payload `1024` (`total_ms`) | `133.246` | `133.461` | libsimplenet `~1.01x` faster |
-| `tcp_echo` payload `16384` (`total_ms`) | `141.403` | `142.093` | libsimplenet `~1.00x` faster |
-| `connection_churn` `16` (`total_ms`) | `286.614` | `319.496` | libsimplenet `~1.11x` faster |
-| `connection_churn` `32` (`total_ms`) | `501.872` | `569.778` | libsimplenet `~1.14x` faster |
-| `connection_churn` `64` (`total_ms`) | `969.782` | `1101.996` | libsimplenet `~1.13x` faster |
+| `idle_wait` (`avg_ns_per_wait`) | `113.398` | `128.721` | libsimplenet `~1.14x` faster |
+| `tcp_echo` payload `64` (`total_ms`) | `133.303` | `134.634` | libsimplenet `~1.01x` faster |
+| `tcp_echo` payload `1024` (`total_ms`) | `135.684` | `135.590` | libsimplenet `~1.00x` faster |
+| `tcp_echo` payload `16384` (`total_ms`) | `147.782` | `149.056` | libsimplenet `~1.01x` faster |
+| `connection_churn` `16` (`total_ms`) | `311.935` | `352.247` | libsimplenet `~1.12x` faster |
+| `connection_churn` `32` (`total_ms`) | `569.255` | `638.269` | libsimplenet `~1.13x` faster |
+| `connection_churn` `64` (`total_ms`) | `1069.240` | `1211.886` | libsimplenet `~1.14x` faster |
 
 ### Async I/O Matrix (Three Targets)
 
@@ -149,9 +149,9 @@ All rows below are from `scenario=async_tcp_echo` with identical
 
 | Payload | libsimplenet `epoll` (`ms`) | libsimplenet `io_uring` (`ms`) | Boost.Asio `epoll` (`ms`) | Paired `boost/libs(epoll)` | Paired `boost/libs(io_uring)` | `epoll/io_uring` (`libs`) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `64` | `81.295` | `78.613` | `74.750` | `0.921939` | `0.961543` | `1.034` |
-| `1024` | `81.737` | `80.023` | `74.964` | `0.917978` | `0.951200` | `1.021` |
-| `16384` | `116.015` | `107.356` | `109.773` | `0.907431` | `0.998898` | `1.081` |
+| `64` | `82.739` | `83.655` | `76.742` | `0.897905` | `0.935181` | `0.989` |
+| `1024` | `85.042` | `81.731` | `74.517` | `0.884594` | `0.925209` | `1.040` |
+| `16384` | `109.326` | `108.340` | `107.950` | `0.969676` | `1.002933` | `1.009` |
 
 Interpretation:
 - `boost/libs(...)` is based on paired medians for `total_ms`; values closer to

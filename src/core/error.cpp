@@ -4,6 +4,10 @@ namespace simplenet {
 
 error::error(std::error_code code) noexcept : code_(code) {}
 
+error error::from_errno() noexcept {
+    return error{std::error_code{errno, std::system_category()}};
+}
+
 error error::from_errno(int value) noexcept {
     return error{std::error_code{value, std::system_category()}};
 }

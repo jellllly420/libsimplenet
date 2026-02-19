@@ -40,7 +40,7 @@ def generate_core_relative(output_dir: Path) -> None:
         "churn_64",
     ]
     # libsimplenet/boost ratio derived from README's median comparison table.
-    values = np.array([1.15, 1.00, 1.01, 1.00, 1.11, 1.14, 1.13])
+    values = np.array([1.14, 1.01, 1.00, 1.01, 1.12, 1.13, 1.14])
 
     fig, ax = plt.subplots(figsize=(11.8, 4.8))
     bars = ax.bar(labels, values, color="#0969da", edgecolor="#1f2328", linewidth=0.6)
@@ -67,9 +67,9 @@ def generate_core_relative(output_dir: Path) -> None:
 
 def generate_async_medians(output_dir: Path) -> None:
     payload_labels = ["64B", "1KiB", "16KiB"]
-    libs_epoll = np.array([81.295, 81.737, 116.015])
-    libs_uring = np.array([78.613, 80.023, 107.356])
-    boost_epoll = np.array([74.750, 74.964, 109.773])
+    libs_epoll = np.array([82.739, 85.042, 109.326])
+    libs_uring = np.array([83.655, 81.731, 108.340])
+    boost_epoll = np.array([76.742, 74.517, 107.950])
 
     x = np.arange(len(payload_labels))
     width = 0.24
@@ -115,8 +115,8 @@ def generate_async_medians(output_dir: Path) -> None:
 
 def generate_async_paired_ratio(output_dir: Path) -> None:
     payload_labels = ["64B", "1KiB", "16KiB"]
-    ratio_epoll = np.array([0.921939, 0.917978, 0.907431])
-    ratio_uring = np.array([0.961543, 0.951200, 0.998898])
+    ratio_epoll = np.array([0.897905, 0.884594, 0.969676])
+    ratio_uring = np.array([0.935181, 0.925209, 1.002933])
     x = np.arange(len(payload_labels))
 
     fig, ax = plt.subplots(figsize=(9.6, 4.8))
@@ -139,7 +139,7 @@ def generate_async_paired_ratio(output_dir: Path) -> None:
     ax.axhline(1.0, color="#cf222e", linestyle="--", linewidth=1.4, label="Parity (1.00)")
     ax.set_xticks(x)
     ax.set_xticklabels(payload_labels)
-    ax.set_ylim(0.88, 1.01)
+    ax.set_ylim(0.87, 1.03)
     ax.set_ylabel("Paired ratio (higher means smaller gap)")
     ax.set_title("Async Paired Ratio (boost_over_libs)")
     ax.legend(loc="lower right")

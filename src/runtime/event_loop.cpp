@@ -403,17 +403,7 @@ void event_loop::consume_wakeup() noexcept {
     }
 
     std::uint64_t signal = 0;
-    while (true) {
-        const auto count = ::read(wake_fd_.get(), &signal, sizeof(signal));
-        if (count > 0) {
-            continue;
-        }
-
-        if (count < 0 && errno == EINTR) {
-            continue;
-        }
-        break;
-    }
+    while (::read(wake_fd_.get(), &signal, sizeof(signal)) < 0 && errno == EINTR) {}
 }
 
 void event_loop::process_ready_event(
@@ -475,15 +465,14 @@ std::uintptr_t event_loop::handle_key(std::coroutine_handle<> handle) noexcept {
 }
 
 void event_loop::cleanup_completed_roots() noexcept {
-    const auto new_end = std::remove_if(root_tasks_.begin(), root_tasks_.end(),
-                                        [](std::coroutine_handle<> handle) {
-                                            if (!handle.done()) {
-                                                return false;
-                                            }
-                                            handle.destroy();
-                                            return true;
-                                        });
-    root_tasks_.erase(new_end, root_tasks_.end());
+    for (auto it = root_tasks_.begin(); it != root_tasks_.end(); ) {
+        if (it->done()) {
+            it->destroy();
+            it = root_tasks_.erase(it);
+        } else {
+            ++it;
+        }
+    }
 }
 
 void event_loop::destroy_all_roots() noexcept {

@@ -25,11 +25,16 @@ public:
     explicit error(std::error_code code) noexcept;
 
     /**
-     * @brief Build an error from errno.
-     * @param value errno value. Defaults to current `errno`.
+     * @brief Build an error from the current `errno`.
      * @return Converted `error` in the generic category.
      */
-    [[nodiscard]] static error from_errno(int value = errno) noexcept;
+    [[nodiscard]] static error from_errno() noexcept;
+    /**
+     * @brief Build an error from an explicit errno value.
+     * @param value errno value to convert.
+     * @return Converted `error` in the generic category.
+     */
+    [[nodiscard]] static error from_errno(int value) noexcept;
 
     /// @return Underlying `std::error_code`.
     [[nodiscard]] std::error_code code() const noexcept;

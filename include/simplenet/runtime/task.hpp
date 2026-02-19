@@ -65,8 +65,8 @@ class task_promise_base {
 public:
     task_promise_base() noexcept = default;
     ~task_promise_base() = default;
-    task_promise_base(const task_promise_base&) = default;
-    task_promise_base& operator=(const task_promise_base&) = default;
+    task_promise_base(const task_promise_base&) = delete;
+    task_promise_base& operator=(const task_promise_base&) = delete;
 
     [[nodiscard]] scheduler *scheduler_ptr() const noexcept {
         return scheduler_;

@@ -79,6 +79,29 @@ Installed packages (key):
 - Step 4.4: Clean-context reviewer validated fairness/correctness for this
   iteration and returned verdict `OK`.
 
+### Iteration 5 (Completed)
+
+- Step 5.1: Code-quality review of codebase; 9 issues identified spanning a
+  real semantic bug, performance regressions, and code-quality concerns.
+- Step 5.2: Applied fixes in dependency order:
+  - `error::from_errno` split into two explicit overloads (no `errno` default arg).
+  - `has_event` made `constexpr` inline in header (eliminates PLT call on hot path).
+  - `task_promise_base` copy operations deleted (prevents aliased coroutine state).
+  - `consume_wakeup` loop simplified; eventfd clears atomically on single read,
+    removing a guaranteed extra `EAGAIN` syscall per wakeup (both event loops).
+  - `endpoint::loopback` / `endpoint::any` extracted to dedicated `endpoint.cpp`.
+  - `cleanup_completed_roots` replaced `std::remove_if` with explicit erase loop
+    (both event loops).
+  - `async_read_exact` / `async_write_all` simplified to delegate to
+    `async_read_some` / `async_write_some` (cleaner, same fast path preserved).
+  - `async_sleep` uses thread-local `timerfd` (one per event-loop thread) instead
+    of creating a new fd on every call; eliminates ~10 fd open/close cycles per
+    DNS polling loop.
+  - `resolve_ipv4_tcp_endpoints` now maps `EAI_*` codes to meaningful `errno`
+    values instead of always returning `EHOSTUNREACH`.
+- Step 5.3: All 46 tests passed in Debug (ASAN+UBSAN), GCC, and Clang CI configs.
+- Step 5.4: Re-ran full Release perf suite; persisted `v6` output.
+
 ## Performance Suite Commands (Expected)
 
 ```bash
@@ -132,8 +155,10 @@ Persisted file:
 
 - `docs/development/perf-data/2026-02-19-suite-release-v4.csv` (async-integrated
   suite output path)
-- `docs/development/perf-data/2026-02-19-suite-release-v5.csv` (current baseline
-  after async optimization pass)
+- `docs/development/perf-data/2026-02-19-suite-release-v5.csv` (baseline after
+  async optimization pass)
+- `docs/development/perf-data/2026-02-20-suite-release-v6.csv` (current baseline
+  after code-quality review fixes)
 - Index/deprecation marker: `docs/development/perf-data/README.md`
 
 Scenarios covered:
@@ -182,6 +207,36 @@ Median snapshot (from persisted CSV):
   - `payload=64`: epoll `-3.924 ms` (`-4.61%`), io_uring `-4.365 ms` (`-5.26%`).
   - `payload=1024`: epoll `-4.335 ms` (`-5.04%`), io_uring `-3.321 ms` (`-3.98%`).
   - `payload=16384`: epoll `+0.061 ms` (`+0.05%`), io_uring `+0.857 ms` (`+0.81%`).
+
+- Core scenarios (`v6`, post code-quality fixes):
+  - `idle_wait`: libsimplenet `113.398 ns/op` vs Boost.Asio `128.721 ns/op`
+    (paired ratio `1.135807`, libsimplenet faster).
+  - `tcp_echo payload=64`: libsimplenet `133.303 ms` vs Boost.Asio `134.634 ms`
+    (paired ratio `1.010814`, libsimplenet slightly faster).
+  - `tcp_echo payload=1024`: libsimplenet `135.684 ms` vs Boost.Asio `135.590 ms`
+    (paired ratio `1.003985`, near parity).
+  - `tcp_echo payload=16384`: libsimplenet `147.782 ms` vs Boost.Asio `149.056 ms`
+    (paired ratio `1.011846`, libsimplenet slightly faster).
+  - `connection_churn 16`: libsimplenet `311.935 ms` vs Boost.Asio `352.247 ms`
+    (paired ratio `1.119001`, libsimplenet faster).
+  - `connection_churn 32`: libsimplenet `569.255 ms` vs Boost.Asio `638.269 ms`
+    (paired ratio `1.132427`, libsimplenet faster).
+  - `connection_churn 64`: libsimplenet `1069.240 ms` vs Boost.Asio `1211.886 ms`
+    (paired ratio `1.136869`, libsimplenet faster).
+
+- Async three-target scenarios (`v6`, `iterations=2000`, `connections=8`):
+  - `payload=64`: libs/epoll `82.739 ms`, libs/io_uring `83.655 ms`,
+    boost/epoll `76.742 ms`.
+    - paired `boost_over_libs(epoll)=0.897905`
+    - paired `boost_over_libs(io_uring)=0.935181`
+  - `payload=1024`: libs/epoll `85.042 ms`, libs/io_uring `81.731 ms`,
+    boost/epoll `74.517 ms`.
+    - paired `boost_over_libs(epoll)=0.884594`
+    - paired `boost_over_libs(io_uring)=0.925209`
+  - `payload=16384`: libs/epoll `109.326 ms`, libs/io_uring `108.340 ms`,
+    boost/epoll `107.950 ms`.
+    - paired `boost_over_libs(epoll)=0.969676`
+    - paired `boost_over_libs(io_uring)=1.002933`
 
 ## Repeated-Run Validation (Hyperfine)
 
@@ -337,7 +392,7 @@ Rationale:
 
 ## Correctness Verification After Performance Changes
 
-Command:
+Command (Iteration 4):
 
 ```bash
 cmake -S . -B build
@@ -349,8 +404,32 @@ cmake --build build-perf -j
 bash ./scripts/run_perf_suite.sh > docs/development/perf-data/2026-02-19-suite-release-v5.csv
 ```
 
-Result:
+Result (Iteration 4):
 
 - `46/46` tests passed.
 - Full Release suite re-ran successfully and persisted `v5` artifact.
 - Clean-context reviewer verdict for Iteration 4: `OK`.
+
+Command (Iteration 5 — code-quality fixes pass):
+
+```bash
+# Tests (Debug, ASAN+UBSAN)
+devcontainer exec --workspace-folder /Volumes/Dev/libsimplenet \
+  cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+devcontainer exec --workspace-folder /Volumes/Dev/libsimplenet \
+  cmake --build build -j
+devcontainer exec --workspace-folder /Volumes/Dev/libsimplenet \
+  ctest --test-dir build --output-on-failure
+
+# Release perf suite
+devcontainer exec --workspace-folder /Volumes/Dev/libsimplenet \
+  bash ./scripts/run_perf_suite.sh \
+  > docs/development/perf-data/2026-02-20-suite-release-v6.csv
+```
+
+Result (Iteration 5):
+
+- `46/46` tests passed in Debug (ASAN+UBSAN), GCC, and Clang CI configurations.
+- Full Release suite re-ran successfully and persisted `v6` artifact.
+- No performance regressions relative to `v5`; characteristic scenario winners
+  unchanged across all scenarios.

@@ -119,8 +119,4 @@ result<void> reactor::ctl(int operation, int fd, std::uint32_t events,
     return err<void>(error::from_errno());
 }
 
-bool has_event(std::uint32_t event_mask, std::uint32_t flag) noexcept {
-    return (event_mask & flag) != 0U;
-}
-
 } // namespace simplenet::epoll

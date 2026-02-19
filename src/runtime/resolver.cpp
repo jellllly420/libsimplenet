@@ -43,46 +43,43 @@ resolve_ipv4_tcp_endpoints(const std::string& host,
     const int resolve_status =
         ::getaddrinfo(host.c_str(), service.c_str(), &hints, &raw_result);
 
-    simplenet::result<std::vector<simplenet::runtime::endpoint>> final_result =
-        simplenet::err<std::vector<simplenet::runtime::endpoint>>(
-            simplenet::make_error_from_errno(EHOSTUNREACH));
-
-    if (resolve_status == 0) {
-        std::vector<simplenet::runtime::endpoint> endpoints;
-        for (addrinfo* cursor = raw_result; cursor != nullptr;
-             cursor = cursor->ai_next) {
-            if (cursor->ai_family != AF_INET || cursor->ai_addr == nullptr) {
-                continue;
-            }
-
-            const auto* ipv4 =
-                reinterpret_cast<const sockaddr_in*>(cursor->ai_addr);
-            char host_buffer[INET_ADDRSTRLEN] = {};
-            const char* converted = ::inet_ntop(AF_INET, &ipv4->sin_addr,
-                                                host_buffer,
-                                                sizeof(host_buffer));
-            if (converted == nullptr) {
-                continue;
-            }
-
-            endpoints.push_back(simplenet::runtime::endpoint{
-                std::string{host_buffer}, ntohs(ipv4->sin_port)});
-        }
-
-        if (endpoints.empty()) {
-            final_result =
-                simplenet::err<std::vector<simplenet::runtime::endpoint>>(
-                    simplenet::make_error_from_errno(ENOENT));
-        } else {
-            final_result = std::move(endpoints);
-        }
+    if (resolve_status != 0) {
+        int mapped = EHOSTUNREACH;
+        if      (resolve_status == EAI_AGAIN)  { mapped = EAGAIN; }
+        else if (resolve_status == EAI_NONAME) { mapped = ENOENT; }
+        else if (resolve_status == EAI_MEMORY) { mapped = ENOMEM; }
+        return simplenet::err<std::vector<simplenet::runtime::endpoint>>(
+            simplenet::make_error_from_errno(mapped));
     }
 
-    if (raw_result != nullptr) {
-        ::freeaddrinfo(raw_result);
+    std::vector<simplenet::runtime::endpoint> endpoints;
+    for (addrinfo* cursor = raw_result; cursor != nullptr;
+         cursor = cursor->ai_next) {
+        if (cursor->ai_family != AF_INET || cursor->ai_addr == nullptr) {
+            continue;
+        }
+
+        const auto* ipv4 =
+            reinterpret_cast<const sockaddr_in*>(cursor->ai_addr);
+        char host_buffer[INET_ADDRSTRLEN] = {};
+        const char* converted = ::inet_ntop(AF_INET, &ipv4->sin_addr,
+                                            host_buffer,
+                                            sizeof(host_buffer));
+        if (converted == nullptr) {
+            continue;
+        }
+
+        endpoints.push_back(simplenet::runtime::endpoint{
+            std::string{host_buffer}, ntohs(ipv4->sin_port)});
     }
 
-    return final_result;
+    ::freeaddrinfo(raw_result);
+
+    if (endpoints.empty()) {
+        return simplenet::err<std::vector<simplenet::runtime::endpoint>>(
+            simplenet::make_error_from_errno(ENOENT));
+    }
+    return endpoints;
 }
 
 class resolver_worker final {
