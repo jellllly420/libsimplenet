@@ -173,33 +173,14 @@ Notes:
 - Table `Relative` values come from `PERF_PAIRED_MEDIAN`, while the middle
   columns show per-implementation medians.
 
-```mermaid
-xychart-beta
-    title "Relative Speed From Median Runs (libsimplenet / Boost.Asio)"
-    x-axis ["idle_wait", "echo_64", "echo_1024", "echo_16384", "churn_16", "churn_32", "churn_64"]
-    y-axis "speed ratio (higher is better for libsimplenet)" 0.95 --> 1.16
-    bar [1.15, 1.00, 0.99, 1.00, 1.11, 1.14, 1.13]
-```
+![Relative speed from median runs](docs/usage/figures/perf-core-relative-speed.png)
 
-```mermaid
-xychart-beta
-    title "Async Echo Median Total Time (lower is better)"
-    x-axis ["64B", "1KiB", "16KiB"]
-    y-axis "total_ms" 70 --> 120
-    bar [81.29, 81.74, 116.02]
-    bar [78.61, 80.02, 107.36]
-    bar [74.75, 74.96, 109.77]
-```
-Series order in chart above: `libsimplenet_epoll`, `libsimplenet_io_uring`,
-`boost_asio_epoll`.
+![Async echo median total time](docs/usage/figures/perf-async-echo-medians-ms.png)
 
-```mermaid
-xychart-beta
-    title "Async Paired Ratio boost_over_libs (higher means smaller gap)"
-    x-axis ["64B", "1KiB", "16KiB"]
-    y-axis "ratio" 0.88 --> 1.01
-    line [0.9219, 0.9180, 0.9074]
-    line [0.9615, 0.9512, 0.9989]
+![Async paired ratio boost over libs](docs/usage/figures/perf-async-paired-ratio.png)
+
+Regenerate these figures with:
+
+```bash
+python3 scripts/generate_perf_figures.py
 ```
-Series order in chart above: `boost_over_libs(epoll)`,
-`boost_over_libs(io_uring)`.
